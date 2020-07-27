@@ -25,6 +25,14 @@ def register():
 @app.route("/login")
 def login():
 		return render_template('login.html')
+
+@app.route("/aroundyou")
+def aroundyou():
+		return render_template('aroundyou.html')
+	
+@app.route("/atyourschool")
+def atyourschool():
+		return render_template('atyourschool.html')
 	
 @app.route("/doRegistration", methods=['POST'])
 def registration():
@@ -104,6 +112,30 @@ def displaysymptoms():
 		symps.append(symp_dict)
 		
 	return json.dumps(symps)
+
+@app.route("/dosearchzip", methods=['POST', 'GET'])
+def dosearchzip():
+	if request.method == 'POST':
+		_zip = request.form['searchzip']
+		conn = mysql.connect()
+		cursor = conn.cursor()
+		cursor.callproc('searchzip',(_zip,))
+		data = cursor.fetchall()
+
+		return render_template('aroundyou.html', data=data)
+	return render_template('aroundyou.html')
+
+@app.route("/dosearchschool", methods=['POST', 'GET'])
+def dosearchschool():
+	if request.method == 'POST':
+		_univ = request.form['searchschool']
+		conn = mysql.connect()
+		cursor = conn.cursor()
+		cursor.callproc('searchSchool',(_univ,))
+		data = cursor.fetchall()
+
+		return render_template('atyourschool.html', data=data)
+	return render_template('atyourschool.html')
 
 @app.route("/home")
 def home():

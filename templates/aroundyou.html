@@ -4,14 +4,21 @@
 		<div class="column full_size unit demo-frame">
 			<div>
 				<h3>How many people are experiencing symptoms around you? Search a zip code to find out.</h3>
-				<form method="POST" action="/doupdate">
+				<form method="post" action="/dosearchzip">
           <label for="searchzip">Search zip code:</label><br>
           <input type="text" id="searchzip" name="searchzip"><br>
+					<label></label>
+					{% for i in data %}
+  				<h1># of people: {{i[0]}}</h1>
+					{% endfor %}
+        	<button id="sb2" class="btn btn-lg btn-primary btn-block" type="submit">Search</button>
 				</form>
 			</div>
 		</div>
-
 		<div class="column full_size unit demo-frame">
 				<a id="logoutButton" class="btn btn-lg btn-primary btn-block" href="/logout">LOG OUT</a>
 		</div>
+
+<script>
+</script>
 {% endblock content %}
