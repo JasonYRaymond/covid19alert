@@ -34,6 +34,10 @@ def aroundyou():
 def atyourschool():
 		return render_template('atyourschool.html')
 	
+@app.route("/yourlocation")
+def yourlocation():
+		return render_template('yourlocation.html')
+	
 @app.route("/doRegistration", methods=['POST'])
 def registration():
 	_fn = request.form['inputFirstName']
@@ -119,7 +123,7 @@ def dosearchzip():
 		_zip = request.form['searchzip']
 		conn = mysql.connect()
 		cursor = conn.cursor()
-		cursor.callproc('searchzip',(_zip,))
+		cursor.callproc('searchZip',(_zip,))
 		data = cursor.fetchall()
 
 		return render_template('aroundyou.html', data=data)
@@ -137,6 +141,16 @@ def dosearchschool():
 		return render_template('atyourschool.html', data=data)
 	return render_template('atyourschool.html')
 
+@app.route("/displaycountbyzip", methods=['POST', 'GET'])
+def displaycountbyzip():
+	_eml = session.get('user')
+	conn = mysql.connect()
+	cursor = conn.cursor()
+	cursor.callproc('searchZipUser',(_eml,))
+	data = cursor.fetchall()
+		
+	return render_template('yourlocation.html', data=data)
+	
 @app.route("/home")
 def home():
 		if (session.get('user')):
