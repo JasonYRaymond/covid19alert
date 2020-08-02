@@ -1,8 +1,11 @@
 {% extends "layout.html "%}
 {% block content %}
+				<!--Part of the code of this page comes from https://www.geeksforgeeks.org/html-geolocation/. Thanks!-->
         <p>Display location in map</p>
         <button class= "geeks" type="button" onclick="getlocation();">
             Current Position</button>
+				<button class= "geeks" type="button" ><a href="/doanalyze">
+            Analyze Route</a></button>
 				{% for i in data %}
   				<h1 hidden id='cnt'>{{i[0]}}</h1>
 				{% endfor %}

@@ -1,0 +1,33 @@
+{% extends "layout.html "%}
+{% block content %}
+ 	<h1>Enter Route</h1>
+		<div class="column full_size unit demo-frame">
+			<div>
+				<h3>Where have you been for the fast five days? Enter the location you've been and find out the dangerous places around you!</h3>
+				<form method="post" action="/submitroute">
+          <label for="longitude1">Longitude 1:</label><br>
+          <input type="text" id="longitude1" name="longitude1"><br>
+					<label for="latitude1">Latitude 1:</label><br>
+          <input type="text" id="latitude1" name="latitude1"><br>
+					<label></label>
+					<label for="longitude2">Longitude 2:</label><br>
+          <input type="text" id="longitude2" name="longitude2"><br>
+					<label for="latitude2">Latitude 2:</label><br>
+          <input type="text" id="latitude2" name="latitude2"><br>
+					<label></label>
+					<label for="longitude3">Longitude 3:</label><br>
+          <input type="text" id="longitude3" name="longitude3"><br>
+					<label for="latitude3">Latitude 3:</label><br>
+          <input type="text" id="latitude3" name="latitude3"><br>
+					<label></label>
+        	<button id="sbroute" class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+				</form>
+			</div>
+		</div>
+		<div class="column full_size unit demo-frame">
+				<a id="logoutButton" class="btn btn-lg btn-primary btn-block" href="/logout">LOG OUT</a>
+		</div>
+
+<script>
+</script>
+{% endblock content %}

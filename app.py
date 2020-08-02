@@ -38,6 +38,10 @@ def atyourschool():
 def yourlocation():
 		return render_template('yourlocation.html')
 	
+@app.route("/enterroute")
+def enterRoute():
+		return render_template('enterRoute.html')
+	
 @app.route("/doRegistration", methods=['POST'])
 def registration():
 	_fn = request.form['inputFirstName']
@@ -150,6 +154,31 @@ def displaycountbyzip():
 	data = cursor.fetchall()
 		
 	return render_template('yourlocation.html', data=data)
+
+@app.route("/submitroute", methods=['POST', 'GET'])
+def submitroute():
+	if request.method == 'POST':
+		_long1 = request.form['longitude1']
+		_lat1 = request.form['latitude1']
+		_long2 = request.form['longitude2']
+		_lat2 = request.form['latitude2']
+		_long3 = request.form['longitude3']
+		_lat3 = request.form['latitude3']
+		
+		
+		conn = mysql.connect()
+		cursor = conn.cursor()
+		cursor.callproc('getID',())
+		data = cursor.fetchall()
+		_id = data[0][0] + 1
+		_eml = session.get('user')
+		
+		cursor.callproc('updateRoutes',(_id,_eml,_long1,_lat1))
+		cursor.callproc('updateRoutes',(_id,_eml,_long2,_lat2))
+		cursor.callproc('updateRoutes',(_id,_eml,_long3,_lat3))
+		conn.commit()
+		return render_template('enterRoute.html', data=data)
+	return render_template('enterRoute.html')
 	
 @app.route("/home")
 def home():
@@ -162,6 +191,22 @@ def home():
 def updatesymptoms():
 	return render_template('updateSymptoms.html')
 
+@app.route("/doanalyze", methods=['GET','POST'])
+def doanalyze():
+	conn = mysql.connect()
+	cursor = conn.cursor()
+	cursor.callproc('getID',())
+	data = cursor.fetchall()
+	n = data[0][0]
+	
+	ls = []
+	for i in range(1, n + 1):
+			cursor.callproc('getRoutes', (i,))
+			t = cursor.fetchall()
+			ls.append(t)
+	print(ls)
+	return render_template('home.html')
+	
 @app.route("/doupdate", methods=['GET','POST'])
 def doupdate():
 	_s1 = False
