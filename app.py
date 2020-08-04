@@ -42,6 +42,10 @@ def yourlocation():
 def enterRoute():
 		return render_template('enterRoute.html')
 	
+@app.route("/yournewlocation")
+def yournewlocation():
+		return render_template('yournewlocation.html')
+	
 @app.route("/doRegistration", methods=['POST'])
 def registration():
 	_fn = request.form['inputFirstName']
@@ -61,7 +65,7 @@ def registration():
 	
 	if len(data) == 0:
 		conn.commit()
-		return json.dumps({'message':'User created successfully!'})
+		return render_template('login.html')
 	else:
 		return json.dumps({'error':str(data[0])})
 	return json.dumps({'html':'<span>Registered</span>'})
@@ -195,17 +199,21 @@ def updatesymptoms():
 def doanalyze():
 	conn = mysql.connect()
 	cursor = conn.cursor()
-	cursor.callproc('getID',())
-	data = cursor.fetchall()
-	n = data[0][0]
+	cursor.callproc('getCountsCount',())
+	tmp = cursor.fetchall()
+	n = tmp[0][0]
 	
-	ls = []
-	for i in range(1, n + 1):
-			cursor.callproc('getRoutes', (i,))
-			t = cursor.fetchall()
-			ls.append(t)
-	print(ls)
-	return render_template('home.html')
+	cursor.callproc('getCounts', ())
+	tmp2 = cursor.fetchall()
+	data = []
+	for i in tmp2:
+			t = []
+			for j in i:
+				t.append(int(j))
+			data.append(t)
+
+	print(data)
+	return render_template('yournewlocation.html', data=data)
 	
 @app.route("/doupdate", methods=['GET','POST'])
 def doupdate():
