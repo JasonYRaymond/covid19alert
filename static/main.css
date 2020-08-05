@@ -140,7 +140,7 @@ a.article-title:hover {
 #main{
 	top: 0px;
 	opacity: 0.5;
-	background-image: url('images/demo/background.jpg');
+	background-image: url('images/demo/background.png');
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: cover;
