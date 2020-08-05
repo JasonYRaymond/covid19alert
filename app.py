@@ -209,7 +209,7 @@ def doanalyze():
 	for i in tmp2:
 			t = []
 			for j in i:
-				t.append(int(j))
+				t.append(float(j))
 			data.append(t)
 
 	print(data)
