@@ -1,0 +1,21 @@
+{% extends "layout.html "%}
+{% block content %}
+ 	<h1>Home</h1>
+		<div class="column full_size unit demo-frame">
+      <div class="media demo-container">
+        <img id="img" src="{{  image_file }}">
+      </div>
+			<div>
+				<h1>COVID-19 refers to the respiratory illness caused by the SARS-CoV-2 virus. The symptoms, experienced within 2-14 days include fever, cough, or shortness of breath; immediate attention is needed if you have difficulty breathing, constant pain or pressure in the chest, confusion or have difficulty awakening, or bluish tint to skin. People with lowered immune systems and older people are most susceptible to COVID-19. This app will keep track of people exhibiting symptoms of COVID-19.</h1>
+			</div>
+			
+		</div>
+
+		<div class="column full_size unit demo-frame">
+				<a id="logoutButton" class="btn btn-lg btn-primary btn-block" href="/logout">LOG OUT</a>
+		</div>
+		<div class="column full_size unit demo-frame">
+				<a id="deleteButton" class="btn btn-lg btn-primary btn-block" href="/delete">DELETE ALL YOUR INFO</a>
+		</div>
+
+{% endblock content %}
